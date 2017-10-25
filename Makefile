@@ -1,7 +1,7 @@
 ###############################################################################
 # Author: Sean Foster         																			<Makefile>
-# Date: 09/21/2017
-# Description: Makefile for Project 02: Zoo Tycoon
+# Date: 10/23/2017
+# Description: Makefile for openGL
 ###############################################################################
 CXX = g++
 CXXFLAGS = -std=c++0x
