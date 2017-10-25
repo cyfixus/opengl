@@ -9,14 +9,9 @@ CXXFLAGS += -Wall
 CXXFLAGS += -pedantic-errors
 CXXFLAGS += -g
 LDFLAGS = -lGL
-LDFLAGS += -lGLU
 LDFLAGS += -lGLEW
 LDFLAGS += -lglfw
-LDFLAGS += -lX11 
-LDFLAGS += -lXxf86vm 
-LDFLAGS += -lXrandr 
-LDFLAGS += -lpthread 
-LDFLAGS += -lXi
+
 
 OBJS =  opngl.o
 
