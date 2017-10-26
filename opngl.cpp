@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <fstream>
 
 
 static unsigned int CompileShader(unsigned int type, const std::string &source)
@@ -49,6 +50,17 @@ static unsigned int CreateShader(const std::string &vertexShader,
 
 }
 
+std::string loadShader(const char *fileName)
+{
+  std::ifstream ifs(fileName);
+  if(ifs)
+  {
+    return std::string(std::istreambuf_iterator<char>(ifs),
+                       std::istreambuf_iterator<char>());
+  }
+  return "bad file";
+}
+
 int main(void)
 {
   GLFWwindow* window;
@@ -92,27 +104,10 @@ int main(void)
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
-  std::string vertexShader = 
-        "#version 320 es\n"
-        "\n"
-        "layout(location = 0) in vec4 position;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "  gl_Position = position;\n"
-        "}\n";
+  std::string vertexShader = loadShader("vertexshader.vs");
+  std::string fragmentShader = loadShader("fragshader.fs");
 
-  std::string fragmentShader = 
-        "#version 320 es\n"
-        "precision mediump float;\n"
-        "layout(location = 0) out vec4 color;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "  color = vec4(1.0, 0.0, 1.0, 1.0);\n"
-        "}\n";
-
-  unsigned int shader = CreateShader(vertexShader, fragmentShader);
+  unsigned int shader = CreateShader(vertexShader.c_str(), fragmentShader.c_str());
   glUseProgram(shader);
 
 
